@@ -1,20 +1,19 @@
 header {
-  background-color: rgba(6, 12, 34, 0.8);
+  background-color: var(--primary-color);
   color: white;
   padding: 10px;
-  text-align: center;
+  text-align: left;
   margin: 0%;
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: #1c77ac;
+  background-color: var(--secondary-color);
 }
 /* Styling the navigation bar */
 .navbar {
   display: flex;
-
   justify-content: space-between;
   align-items: center;
   list-style-type: none;
@@ -22,7 +21,7 @@ body {
 
 /* Styling the brand name (Sarajevo) */
 .navbar-brand {
-  margin-left: 20px; /* Space from the left edge */
+  margin-left: px; /* Space from the left edge */
   font-weight: bold;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   font-size: larger;
@@ -31,15 +30,16 @@ body {
 /* Container for navigation links */
 .navbar-nav {
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   list-style-type: none;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   font-size: larger;
 }
 
 /* Styling the navigation links */
 .navbar-nav li {
-  padding: 8px;
   margin-right: 40px; /* Space between the menu items */
   margin-right: 10;
 }
@@ -55,7 +55,7 @@ body {
 }
 
 footer {
-  background-color: rgb(1, 1, 40);
+  background-color: var(--footer-color);
   color: white;
   padding: 20px 0;
   text-align: center;
@@ -118,5 +118,22 @@ div {
 }
 h1 {
   text-align: center;
-  text-size-adjust: 200px;
+  text-size-adjust: 60px;
+}
+
+#icon {
+  width: 25px;
+  cursor: pointer;
+}
+
+:root {
+  --primary-color: hsla(0, 0%, 100%, 0.251);
+  --secondary-color: hwb(0 50% 50%);
+  --footer-color: #464663;
+}
+
+.dark-theme {
+  --primary-color: rgba(6, 12, 34, 0.8);
+  --secondary-color: #1c77ac;
+  --footer-color: rgb(1, 1, 40);
 }

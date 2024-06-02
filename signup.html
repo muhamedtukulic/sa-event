@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="signup.css" />
+    <style>
+      h1 {
+        text-align: center;
+        font-size: 60px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <div class="navbar-brand">
+          <p style="font-size: 30px">
+            <span style="color: #f82249">SA</span> Events
+          </p>
+        </div>
+        <ul class="navbar-nav">
+          <li><a href="project1.html">Home</a></li>
+          <li><a href="upevents.html">Events</a></li>
+          <li><a href="buycard.html">Buy card</a></li>
+          <li><a href="#signup">SignUp</a></li>
+          <li><img src="images/moon.png" id="icon" /></li>
+        </ul>
+      </nav>
+    </header>
+    <br />
+    <br />
+
+    <h1>
+      <span style="color: #f82249">Sign</span>
+      <span style="color: aliceblue">In</span>
+    </h1>
+
+    <div class="input_container">
+      <form
+        name="formValidation"
+        id="formValidation"
+        action="javascript:void(0)"
+      >
+        <div class="input-row">
+          <input type="text" name="name" placeholder="Name*" required />
+        </div>
+        <div class="input-row">
+          <input type="email" name="email" placeholder="Email*" required />
+        </div>
+        <div class="input-row">
+          <input type="text" name="phone" placeholder="Phone*" required />
+        </div>
+        <div class="input-row">
+          <input type="text" name="subject" placeholder="Event*" required />
+        </div>
+        <div class="input-row">
+          <textarea
+            placeholder="Message"
+            name="formMessage"
+            required
+          ></textarea>
+        </div>
+        <div class="text-center">
+          <input type="submit" value="submit" />
+        </div>
+      </form>
+    </div>
+
+    <br />
+    <br />
+
+    <footer>
+      <div class="container">
+        <div class="social-links">
+          <a
+            href="https://www.facebook.com/"
+            class="social-link"
+            target="_blank"
+            ><img src="images/SLIKE/fp.jpg" alt="Facebook"
+          /></a>
+          <a
+            href="https://twitter.com/?lang=en"
+            class="social-link"
+            target="_blank"
+            ><img src="images/SLIKE/ptica.jpg" alt="Twitter"
+          /></a>
+          <a
+            href="https://www.instagram.com/"
+            class="social-link"
+            target="_blank"
+            ><img src="images/SLIKE/instaaa.jpg" alt="Instagram"
+          /></a>
+          <a href="https://ba.linkedin.com/" class="social-link" target="_blank"
+            ><img src="images/SLIKE/link.jpg" alt="LinkedIn"
+          /></a>
+        </div>
+        <h4 style="color: #f82249">CONTACT US</h4>
+        <p><strong>Phone:</strong> +387 61 225 883</p>
+        <p><strong>Email: </strong>faruk.curevac@stu.ibu.edu.ba</p>
+        <br />
+        <br />
+        <p>&copy; 2024 SA Events. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"
+    ></script>
+    <script src="signup.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#formValidation").submit(function (event) {
+          // Prevent default form submission
+          event.preventDefault();
+
+          // Check if the form is valid
+          if ($(this).valid()) {
+            // Create a styled success message
+            var successMessage = $("<div>")
+              .text("Data saved successfully!")
+              .css({
+                "background-color": "#4CAF50",
+                color: "white",
+                padding: "10px",
+                "border-radius": "5px",
+                "text-align": "center",
+                position: "fixed",
+                top: "20px",
+                right: "20px",
+                zIndex: "9999", // Ensure the message is on top of other content
+              });
+
+            // Append the message to the body
+            $("body").append(successMessage);
+
+            // Optional: Scroll to the success message
+            $("html, body").animate(
+              {
+                scrollTop: successMessage.offset().top,
+              },
+              1000
+            );
+            setTimeout(function () {
+              successMessage.fadeOut(1000, function () {
+                $(this).remove();
+              });
+            }, 5000);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

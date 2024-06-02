@@ -5,6 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SA Events</title>
     <link rel="stylesheet" href="style.css" />
+    <style>
+      .edit-btn,
+      .delete-btn {
+        background-color: #f82249;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        margin: 5px;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+
+      .edit-btn:hover,
+      .delete-btn:hover {
+        background-color: #d81b3f;
+      }
+    </style>
   </head>
   <body>
     <header>
@@ -16,9 +33,10 @@
         </div>
         <ul class="navbar-nav">
           <li><a href="#home">Home</a></li>
-
           <li><a href="upevents.html">Events</a></li>
           <li><a href="buycard.html">Buy card</a></li>
+          <li><a href="signup.html">SignUp</a></li>
+          <li><img src="images/moon.png" id="icon" /></li>
         </ul>
       </nav>
     </header>
@@ -56,25 +74,90 @@
       </div>
     </section>
 
-    <div class="gallery">
-      <div class="gallery-item">
-        <img src="SLIKE/kosevo.jpg" alt="Image 1" />
-      </div>
-      <div class="gallery-item">
-        <img src="images/SLIKE/docek.jpg" alt="Image 2" />
-      </div>
-      <div class="gallery-item">
-        <img src="images/SLIKE/zetra.jpg" alt="Image 3" />
-      </div>
-      <!-- Add more images as needed -->
-    </div>
+    <hr class="custom-hr" />
 
-    <div id="modal" class="modal">
-      <span class="close">&times;</span>
-      <img class="modal-content" id="modal-img" />
-    </div>
+    <section id="faq">
+      <div class="faq-section">
+        <h2 style="color: #f82249">Frequently Asked Questions</h2>
+        <br />
+        <div class="faq-item">
+          <button class="faq-toggle">What payment method do you accept?</button>
+          <div class="faq-content">
+            <p>
+              CREDIT CARD. This service is made possible by Monri Payment System
+              and UniCredit Bank performs processing and billing. Monri Payment
+              System keeps all your data strictly confidential. After each
+              successful transaction, you will receive a confirmation of the
+              completed payment by email. INVOICE. Rajvosa events has made it
+              possible to purchase tickets for a specific event with the option
+              of paying by invoice. This option is convenient for people who
+              have SMS banking.
+            </p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-toggle">How are tickets delivered?</button>
+          <div class="faq-content">
+            <p>
+              After successful payment, the tickets are automatically delivered
+              to the email address you entered during registration. Tickets are
+              delivered in PDF format. file. Tickets must be printed.
+            </p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-toggle">Do I have any additional costs?</button>
+          <div class="faq-content">
+            <p>
+              All tickets sold by the Rajvosa events service are sold
+              exclusively as an agent, and the ticket prices already include
+              VAT. The ticket price is determined by the organizer, and Rajvosa
+              events may not change it. Costs when paying by credit card are
+              shown at checkout and increased by the amount of the bank
+              commission.
+            </p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-toggle">What if the event is cancelled?</button>
+          <div class="faq-content">
+            <p>
+              If the event is cancelled, the Organizer is responsible for
+              refunding the money you paid for the ticket. It does not include
+              delivery costs or other costs incurred during the transaction. The
+              money will be returned only with a confirmation of payment and a
+              copy of the ticket or the received email with a unique code. If
+              the event is extended for another date, the money will not be
+              returned until the moment of complete cancellation of the event by
+              the organizer or unless the Organizer decides otherwise in favor
+              of its customers. Rajvosa events always stands by its clients and
+              customers and will always protect their rights.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <script src="scripts.js"></script>
+    <section id="comments">
+      <div class="container">
+        <h2 style="color: #f82249">User Comments</h2>
+        <form id="comment-form">
+          <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required />
+          </div>
+          <div>
+            <label for="comment">Comment:</label>
+            <textarea id="comment" name="comment" rows="4" required></textarea>
+          </div>
+          <button type="submit">Add Comment</button>
+        </form>
+        <div id="comments-container">
+          <!-- Comments will be dynamically loaded here -->
+        </div>
+        <div id="message"></div>
+      </div>
+    </section>
 
     <footer>
       <div class="container">
@@ -110,5 +193,114 @@
         <p>&copy; 2024 SA Events. All rights reserved.</p>
       </div>
     </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        function loadComments() {
+          const xhr = new XMLHttpRequest();
+          xhr.open("GET", "comments.json", true);
+          xhr.onload = function () {
+            if (this.status === 200) {
+              const comments = JSON.parse(this.responseText);
+              displayComments(comments);
+            }
+          };
+          xhr.send();
+        }
+
+        function displayComments(comments) {
+          let output = "";
+          comments.forEach(function (comment, index) {
+            output += `
+              <div class="comment" data-index="${index}">
+                <p><strong>${comment.username}</strong> (${comment.date})</p>
+                <p class="comment-text">${comment.comment}</p>
+                <hr>
+              </div>
+            `;
+          });
+          document.getElementById("comments-container").innerHTML = output;
+        }
+
+        function addComment(event) {
+          event.preventDefault();
+          const username = document.getElementById("username").value;
+          const commentText = document.getElementById("comment").value;
+          const date = new Date().toISOString().split("T")[0]; // Current date in YYYY-MM-DD format
+
+          const newComment = {
+            username: username,
+            comment: commentText,
+            date: date,
+            id: Date.now(),
+          };
+
+          // Append the new comment to the comments container
+          const commentsContainer =
+            document.getElementById("comments-container");
+          const newCommentHtml = `
+            <div class="comment" data-id="${newComment.id}">
+              <p><strong>${newComment.username}</strong> (${newComment.date})</p>
+              <p class="comment-text">${newComment.comment}</p>
+              <button class="edit-btn">Edit</button>
+              <button class="delete-btn">Delete</button>
+              <hr>
+            </div>
+          `;
+          commentsContainer.innerHTML += newCommentHtml;
+
+          // Reset the form
+          document.getElementById("comment-form").reset();
+
+          // Add event listeners to the new buttons
+          commentsContainer
+            .querySelector(`.comment[data-id="${newComment.id}"] .edit-btn`)
+            .addEventListener("click", editComment);
+          commentsContainer
+            .querySelector(`.comment[data-id="${newComment.id}"] .delete-btn`)
+            .addEventListener("click", deleteComment);
+
+          showMessage("Comment added successfully!");
+        }
+
+        function editComment(event) {
+          const commentDiv = event.target.closest(".comment");
+          const commentText = commentDiv.querySelector(".comment-text");
+          const id = commentDiv.getAttribute("data-id");
+
+          if (event.target.textContent === "Edit") {
+            commentText.setAttribute("contenteditable", "true");
+            commentText.focus();
+            event.target.textContent = "Save";
+          } else {
+            commentText.setAttribute("contenteditable", "false");
+            event.target.textContent = "Edit";
+            showMessage("Comment edited successfully!");
+          }
+        }
+
+        function deleteComment(event) {
+          const commentDiv = event.target.closest(".comment");
+          commentDiv.remove();
+          showMessage("Comment deleted successfully!");
+        }
+
+        function showMessage(message) {
+          const messageDiv = document.getElementById("message");
+          messageDiv.textContent = message;
+          setTimeout(() => {
+            messageDiv.textContent = "";
+          }, 3000);
+        }
+
+        document
+          .getElementById("comment-form")
+          .addEventListener("submit", addComment);
+
+        loadComments();
+      });
+    </script>
+
+    <script src="project.js"></script>
   </body>
 </html>

@@ -1,138 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SA Events</title>
-  <!-- Include Bootstrap CSS from CDN for styling -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SA Events</title>
+    <!-- Include Bootstrap CSS from CDN for styling -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="bootstrap.css" />
+    <link rel="stylesheet" href="bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+    />
+    <!-- Toastr CSS -->
+    <style>
+      h1 {
+        text-align: center;
+        font-size: 60px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Your existing HTML code -->
+    <header>
+      <nav class="navbar">
+        <div class="navbar-brand">
+          <p style="font-size: 30px">
+            <span style="color: #f82249">SA</span> Events
+          </p>
+        </div>
+        <ul class="navbar-nav">
+          <li><a href="project1.html">Home</a></li>
+          <li><a href="upevents.html">Events</a></li>
+          <li><a href="buycard.html">Buy card</a></li>
+          <li><a href="signup.html">SignUp</a></li>
+          <li><img src="images/moon.png" id="icon" /></li>
+        </ul>
+      </nav>
+    </header>
 
-  <style>
-    h1{
-      text-align: center;
-      font-size: 60px;
-    }
-  </style>
-</head>
-<body>
+    <br />
+    <br />
+    <br />
 
+    <h1>
+      <span style="color: #f82249">Upcoming</span>
+      <span style="color: aliceblue">Events</span>
+    </h1>
 
-
-
-
-
-
-  <header>
-    <nav class="navbar">
-      <div class="navbar-brand">
-        <p style="font-size: 30px">
-          <span style="color: #f82249">SA</span> Events
-        </p>
-      </div>
-      <ul class="navbar-nav">
-        <li><a href="project1.html">Home</a></li>
-        <li><a href="upevents.html">Events</a></li>
-        <li><a href="buycard.html">Buy card</a></li>
-      </ul>
-    </nav>
-  </header>
-
-
-
-
-
-
-
-<br>
-<br>
-<br>
-
-
-<h1><span style="color: #f82249">Upcomming</span> <span style="color: aliceblue;">Events</span></h1>
-
-
-
-
-
-
-  <div class="container mt-5">
-    <div class="row">
-      <!-- Card 1 -->
-      <div class="col-md-4">
-        <div class="card">
-          <img class="card-img-top" src="images/SLIKE/formula.jpg" alt="Card image cap" style="height: 200px; object-fit: cover;">
-          <div class="card-body">
-            <h5 class="card-title"><a href="">Formula1</a> </h5>
-            <p class="card-text">Marijin Dvor - 09.April</p>
+    <div class="container mt-5">
+      <div class="row">
+        <!-- Card 1 -->
+        <div class="col-md-4">
+          <div class="card">
+            <img
+              class="card-img-top"
+              src="images/SLIKE/formula.jpg"
+              alt="Card image cap"
+              style="height: 200px; object-fit: cover"
+              onclick="showImage('images/SLIKE/formula.jpg')"
+            />
+            <div class="card-body">
+              <h5 class="card-title" title="view more">
+                <a href="#">Formula1</a>
+              </h5>
+              <p class="card-text">Marijin Dvor - 09.April</p>
+            </div>
           </div>
         </div>
-      </div>
-      <!-- Card 2 -->
-      <div class="col-md-4">
-        <div class="card">
-          <img class="card-img-top" src="images/SLIKE/tomo.jpg" alt="Card image cap" style="height: 200px; object-fit: cover;">
-          <div class="card-body">
-            <h5 class="card-title"><a href="">Tomo vs Fabjan</a></h5>
-            <p class="card-text">Zetra - 16.April</p>
+        <!-- Card 2 -->
+        <div class="col-md-4">
+          <div class="card" id="tomo">
+            <img
+              class="card-img-top"
+              src="images/SLIKE/tomo.jpg"
+              alt="Card image cap"
+              style="height: 200px; object-fit: cover"
+              onclick="showImage('images/SLIKE/tomo.jpg')"
+            />
+            <div class="card-body">
+              <h5 class="card-title" title="view more">
+                <a href="#">Tomo vs Fabjan</a>
+              </h5>
+              <p class="card-text">Zetra - 16.April</p>
+            </div>
           </div>
         </div>
-      </div>
-      <!-- Card 3 -->
-      <div class="col-md-4">
-        <div class="card">
-          <img class="card-img-top" src="images/SLIKE/bdugme.jpg" alt="Card image cap" style="height: 200px; object-fit: cover;">
-          <div class="card-body">
-            <h5 class="card-title"><a href="">Bijelo Dugme</a></h5>
-            <p class="card-text">Skenderija-19.March</p>
+        <!-- Card 3 -->
+        <div class="col-md-4">
+          <div class="card">
+            <img
+              class="card-img-top"
+              src="images/SLIKE/bdugme.jpg"
+              alt="Card image cap"
+              style="height: 200px; object-fit: cover"
+              onclick="showImage('images/SLIKE/bdugme.jpg')"
+            />
+            <div class="card-body">
+              <h5 class="card-title">
+                <a href="formula.html" title="view more">Bijelo Dugme</a>
+              </h5>
+              <p class="card-text">Skenderija - 19.March</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <br>
-  <br>
+    <br />
+    <br />
 
+    <br />
+    <br />
 
-  <footer>
-    <div class="container">
+    <h1>
+      <span style="color: #f82249">Event </span>
+      <span style="color: aliceblue">Location</span>
+    </h1>
+
+    <div class="map-container">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2876.227107996191!2d18.406915511333644!3d43.87184593814207!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4758ced4859a042f%3A0xb2741db70615ff0f!2sJuan%20Antonio%20Samaranch%20Olympic%20Hall!5e0!3m2!1sen!2sba!4v1717360687118!5m2!1sen!2sba"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
+    </div>
+
+    <footer>
+      <div class="container">
         <div class="social-links">
-            <a
-              href="https://www.facebook.com/"
-              class="social-link"
-              target="_blank"
-              ><img src="images/SLIKE/fp.jpg" alt="Facebook"
-            /></a>
-            <a
-              href="https://twitter.com/?lang=en"
-              class="social-link"
-              target="_blank"
-              ><img src="images/SLIKE/ptica.jpg" alt="Twitter"
-            /></a>
-            <a
-              href="https://www.instagram.com/"
-              class="social-link"
-              target="_blank"
-              ><img src="images/SLIKE/instaaa.jpg" alt="Instagram"
-            /></a>
-            <a href="https://ba.linkedin.com/" class="social-link" target="_blank"
-              ><img src="images/SLIKE/link.jpg" alt="LinkedIn"
-            /></a>
-          </div>
-          <h4 style="color: #f82249">CONTACT US</h4>
-          <p><strong>Phone:</strong> +387 61 225 883</p>
-          <p><strong>Email: </strong>faruk.curevac@stu.ibu.edu.ba</p>
-          <br />
-          <br />
-  
-          <p>&copy; 2024 SA Events. All rights reserved.</p>
+          <a
+            href="https://www.facebook.com/"
+            class="social-link"
+            target="_blank"
+            ><img src="images/SLIKE/fp.jpg" alt="Facebook"
+          /></a>
+          <a
+            href="https://twitter.com/?lang=en"
+            class="social-link"
+            target="_blank"
+            ><img src="images/SLIKE/ptica.jpg" alt="Twitter"
+          /></a>
+          <a
+            href="https://www.instagram.com/"
+            class="social-link"
+            target="_blank"
+            ><img src="images/SLIKE/instaaa.jpg" alt="Instagram"
+          /></a>
+          <a href="https://ba.linkedin.com/" class="social-link" target="_blank"
+            ><img src="images/SLIKE/link.jpg" alt="LinkedIn"
+          /></a>
         </div>
-    </div>
-  </footer>
+        <h4 style="color: #f82249">CONTACT US</h4>
+        <p><strong>Phone:</strong> +387 61 225 883</p>
+        <p><strong>Email: </strong>faruk.curevac@stu.ibu.edu.ba</p>
+        <br />
+        <br />
+        <p>&copy; 2024 SA Events. All rights reserved.</p>
+      </div>
+    </footer>
 
-  <!-- Bootstrap JS and its dependencies (Optional, if you need Bootstrap JS components) -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-</body>
+    <!-- Modal -->
+
+    <div
+      class="modal fade"
+      id="imageModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="imageModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="imageModalLabel">Upcomming event</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <img id="modalImage" src="" alt="Event Image" class="img-fluid" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toastr JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <!-- Toastr JS -->
+
+    <script>
+      // Trigger toastr notification when the page loads
+      $(document).ready(function () {
+        toastr.info("Sign up to buy ticket", "", {
+          timeOut: 20000,
+        }); // Show toastr notification for 10 seconds
+      });
+    </script>
+
+    <!-- Bootstrap JS and its dependencies (Optional, if you need Bootstrap JS components) -->
+    <script src="upevents.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </body>
 </html>
