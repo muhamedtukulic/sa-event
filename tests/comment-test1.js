@@ -20,19 +20,15 @@ describe('Post a Comment on Project Page', function () {
   });
 
   it('should submit a comment', async () => {
-    await driver.get('https://sa-event.onrender.com/project1.html'); // Change to correct page URL
+    await driver.get('https://sa-event.onrender.com/project1.html'); 
 
-    // Fill in the comment form
     await driver.findElement(By.name('username')).sendKeys('TestUser');
     await driver.findElement(By.name('comment')).sendKeys('This is a test comment from Selenium.');
 
-    // Submit the form
     await driver.findElement(By.css('form#comment-form button[type="submit"]')).click();
 
-    // Wait a moment for DOM update
     await driver.sleep(2000);
 
-    // Check for the newly added comment in the DOM
     const pageSource = await driver.getPageSource();
     assert.ok(pageSource.includes('This is a test comment from Selenium.'));
   });
