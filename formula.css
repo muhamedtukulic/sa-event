@@ -86,9 +86,9 @@ p {
 }
 
 :root {
-  --primary-color: hsla(0, 0%, 100%, 0.251);
-  --secondary-color: hwb(0 50% 50%);
-  --footer-color: #464663;
+  --primary-color: rgba(6, 12, 34, 0.8);
+  --secondary-color: #1c77ac;
+  --footer-color: rgb(1, 1, 40);
 }
 
 .dark-theme {

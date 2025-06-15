@@ -36,7 +36,6 @@
           <li><a href="upevents.html">Events</a></li>
           <li><a href="buycard.html">Buy card</a></li>
           <li><a href="signup.html">SignUp</a></li>
-          <li><img src="images/moon.png" id="icon" /></li>
         </ul>
       </nav>
     </header>
@@ -46,7 +45,7 @@
         <h1 class="mb-4 pb-0">
           All events in<br /><span>Sarajevo</span> at one place.
         </h1>
-        <p class="mb-4 pb-0">Sarajevo, Bosnia & Hercegovina, 2024.</p>
+        <p class="mb-4 pb-0">Sarajevo, Bosnia & Hercegovina, 2025.</p>
       </div>
     </section>
 
@@ -187,6 +186,7 @@
         <h4 style="color: #f82249">CONTACT US</h4>
         <p><strong>Phone:</strong> +387 61 235 883</p>
         <p><strong>Email: </strong>faruk.curevac@stu.ibu.edu.ba</p>
+        <p><strong>Email: </strong>muhamed.tukulic@stu.ibu.edu.ba</p>
         <br />
         <br />
 
@@ -197,77 +197,88 @@
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         function loadComments() {
-          const xhr = new XMLHttpRequest();
-          xhr.open("GET", "comments.json", true);
-          xhr.onload = function () {
-            if (this.status === 200) {
-              const comments = JSON.parse(this.responseText);
+          fetch("/api/comments")
+            .then((res) => res.json())
+            .then((comments) => {
               displayComments(comments);
-            }
-          };
-          xhr.send();
+            })
+            .catch((err) => {
+              console.error("Failed to load comments:", err);
+            });
         }
-
+    
         function displayComments(comments) {
           let output = "";
-          comments.forEach(function (comment, index) {
+          comments.forEach((comment, index) => {
+            const date = new Date(comment.createdAt).toISOString().split("T")[0];
             output += `
               <div class="comment" data-index="${index}">
-                <p><strong>${comment.username}</strong> (${comment.date})</p>
-                <p class="comment-text">${comment.comment}</p>
+                <p><strong>${comment.nameOrEmail}</strong> (${date})</p>
+                <p class="comment-text">${comment.text}</p>
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
                 <hr>
               </div>
             `;
           });
           document.getElementById("comments-container").innerHTML = output;
+    
+          document.querySelectorAll(".edit-btn").forEach(btn =>
+            btn.addEventListener("click", editComment)
+          );
+          document.querySelectorAll(".delete-btn").forEach(btn =>
+            btn.addEventListener("click", deleteComment)
+          );
         }
-
+    
         function addComment(event) {
           event.preventDefault();
           const username = document.getElementById("username").value;
           const commentText = document.getElementById("comment").value;
-          const date = new Date().toISOString().split("T")[0]; // Current date in YYYY-MM-DD format
-
+          const date = new Date().toISOString().split("T")[0];
+    
           const newComment = {
-            username: username,
-            comment: commentText,
-            date: date,
-            id: Date.now(),
+            nameOrEmail: username,
+            text: commentText
           };
-
-          // Append the new comment to the comments container
-          const commentsContainer =
-            document.getElementById("comments-container");
-          const newCommentHtml = `
-            <div class="comment" data-id="${newComment.id}">
-              <p><strong>${newComment.username}</strong> (${newComment.date})</p>
-              <p class="comment-text">${newComment.comment}</p>
-              <button class="edit-btn">Edit</button>
-              <button class="delete-btn">Delete</button>
-              <hr>
-            </div>
-          `;
-          commentsContainer.innerHTML += newCommentHtml;
-
-          // Reset the form
-          document.getElementById("comment-form").reset();
-
-          // Add event listeners to the new buttons
-          commentsContainer
-            .querySelector(`.comment[data-id="${newComment.id}"] .edit-btn`)
-            .addEventListener("click", editComment);
-          commentsContainer
-            .querySelector(`.comment[data-id="${newComment.id}"] .delete-btn`)
-            .addEventListener("click", deleteComment);
-
-          showMessage("Comment added successfully!");
+    
+          fetch("/api/comment", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(newComment),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              // Immediately add to UI
+              const commentsContainer = document.getElementById("comments-container");
+              const newCommentHtml = `
+                <div class="comment" data-id="${Date.now()}">
+                  <p><strong>${username}</strong> (${date})</p>
+                  <p class="comment-text">${commentText}</p>
+                  <button class="edit-btn">Edit</button>
+                  <button class="delete-btn">Delete</button>
+                  <hr>
+                </div>
+              `;
+              commentsContainer.innerHTML += newCommentHtml;
+    
+              document.getElementById("comment-form").reset();
+              showMessage(data.message || "Comment added successfully!");
+    
+              const commentDiv = commentsContainer.lastElementChild;
+              commentDiv.querySelector(".edit-btn").addEventListener("click", editComment);
+              commentDiv.querySelector(".delete-btn").addEventListener("click", deleteComment);
+            })
+            .catch((error) => {
+              console.error("Failed to send comment:", error);
+              showMessage("Error: could not save comment.");
+            });
         }
-
+    
         function editComment(event) {
           const commentDiv = event.target.closest(".comment");
           const commentText = commentDiv.querySelector(".comment-text");
-          const id = commentDiv.getAttribute("data-id");
-
+    
           if (event.target.textContent === "Edit") {
             commentText.setAttribute("contenteditable", "true");
             commentText.focus();
@@ -275,16 +286,16 @@
           } else {
             commentText.setAttribute("contenteditable", "false");
             event.target.textContent = "Edit";
-            showMessage("Comment edited successfully!");
+            showMessage("Comment edited (UI only).");
           }
         }
-
+    
         function deleteComment(event) {
           const commentDiv = event.target.closest(".comment");
           commentDiv.remove();
-          showMessage("Comment deleted successfully!");
+          showMessage("Comment deleted (UI only).");
         }
-
+    
         function showMessage(message) {
           const messageDiv = document.getElementById("message");
           messageDiv.textContent = message;
@@ -292,14 +303,14 @@
             messageDiv.textContent = "";
           }, 3000);
         }
-
+    
         document
           .getElementById("comment-form")
           .addEventListener("submit", addComment);
-
+    
         loadComments();
       });
-    </script>
+    </script>    
 
     <script src="project.js"></script>
   </body>

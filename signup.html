@@ -10,6 +10,72 @@
         text-align: center;
         font-size: 60px;
       }
+
+      /* Updated container styling for input_container only */
+      .input_container {
+        max-width: 480px;
+        margin: 2rem auto 4rem auto;
+        background-color: #ffffff;
+        padding: 2rem 2.5rem;
+        border-radius: 0.75rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        box-sizing: border-box;
+      }
+
+      .input-row {
+        margin-bottom: 1.5rem;
+      }
+
+      /* Input fields styling */
+      .input-row input[type="text"],
+      .input-row input[type="email"],
+      .input-row input[type="password"] {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 0.5rem;
+        box-sizing: border-box;
+        transition: border-color 0.25s ease;
+      }
+
+      .input-row input[type="text"]:focus,
+      .input-row input[type="email"]:focus,
+      .input-row input[type="password"]:focus {
+        border-color: #f82249; /* keep same highlight color on focus */
+        outline: none;
+      }
+
+      /* Center the submit button */
+      .text-center {
+        text-align: center;
+      }
+      .text-center input[type="submit"] {
+        cursor: pointer;
+        font-size: 1.1rem;
+        padding: 0.9rem 2.5rem;
+        border-radius: 0.5rem;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        display: inline-block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      .text-center input[type="submit"]:hover {
+        transform: scale(1.05);
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 520px) {
+        .input_container {
+          margin: 1.5rem 1rem 3rem 1rem;
+          padding: 1.5rem 1.5rem;
+        }
+
+        h1 {
+          font-size: 48px;
+        }
+      }
     </style>
   </head>
   <body>
@@ -25,7 +91,6 @@
           <li><a href="upevents.html">Events</a></li>
           <li><a href="buycard.html">Buy card</a></li>
           <li><a href="#signup">SignUp</a></li>
-          <li><img src="images/moon.png" id="icon" /></li>
         </ul>
       </nav>
     </header>
@@ -34,7 +99,7 @@
 
     <h1>
       <span style="color: #f82249">Sign</span>
-      <span style="color: aliceblue">In</span>
+      <span style="color: aliceblue">Up</span>
     </h1>
 
     <div class="input_container">
@@ -47,24 +112,32 @@
           <input type="text" name="name" placeholder="Name*" required />
         </div>
         <div class="input-row">
+          <input type="text" name="surname" placeholder="Surname*" required />
+        </div>
+        <div class="input-row">
           <input type="email" name="email" placeholder="Email*" required />
         </div>
         <div class="input-row">
-          <input type="text" name="phone" placeholder="Phone*" required />
-        </div>
-        <div class="input-row">
-          <input type="text" name="subject" placeholder="Event*" required />
-        </div>
-        <div class="input-row">
-          <textarea
-            placeholder="Message"
-            name="formMessage"
+          <input
+            type="password"
+            name="password"
+            placeholder="Password*"
             required
-          ></textarea>
+          />
+        </div>
+        <div class="input-row">
+          <input
+            type="password"
+            name="confirm_password"
+            placeholder="Confirm Password*"
+            required
+          />
         </div>
         <div class="text-center">
-          <input type="submit" value="submit" />
+          <input type="submit" value="Sign Up" />
         </div>
+        
+        
       </form>
     </div>
 
@@ -99,6 +172,7 @@
         <h4 style="color: #f82249">CONTACT US</h4>
         <p><strong>Phone:</strong> +387 61 225 883</p>
         <p><strong>Email: </strong>faruk.curevac@stu.ibu.edu.ba</p>
+        <p><strong>Email: </strong>muhamed.tukulic@stu.ibu.edu.ba</p>
         <br />
         <br />
         <p>&copy; 2024 SA Events. All rights reserved.</p>
@@ -155,3 +229,5 @@
     </script>
   </body>
 </html>
+
+

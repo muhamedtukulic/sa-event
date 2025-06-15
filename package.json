@@ -1,0 +1,24 @@
+{
+  "name": "sa-event-project",
+  "version": "1.0.0",
+  "main": "project.js",
+  "scripts": {
+    "start": "node api/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/farukcurevac/sa-event-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/farukcurevac/sa-event-project/issues"
+  },
+  "homepage": "https://github.com/farukcurevac/sa-event-project#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0",
+    "mongoose": "^8.15.2"
+  }
+}
