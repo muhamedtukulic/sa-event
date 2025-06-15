@@ -7,15 +7,14 @@ const Comment = require('./comment.model');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Connect to MongoDB (make sure MongoDB is running locally)
-mongoose.connect('mongodb://localhost:27017/signupdb', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}).then(() => {
-  console.log('✅ MongoDB connected');
-}).catch(err => {
-  console.error('❌ MongoDB connection error:', err);
-});
+mongoose
+  .connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then(() => console.log('✅ MongoDB connected'))
+  .catch((err) => console.error('❌ MongoDB connection error:', err));
+
 
 app.use(express.json());
 
