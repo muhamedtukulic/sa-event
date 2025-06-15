@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/farukcurevac/sa-event-project.git"
+    "url": "git+https://github.com/muhamedtukulic/sa-event.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/farukcurevac/sa-event-project/issues"
+    "url": "https://github.com/muhamedtukulic/sa-event/issues"
   },
-  "homepage": "https://github.com/farukcurevac/sa-event-project#readme",
+  "homepage": "https://github.com/muhamedtukulic/sa-event#readme",
   "description": "",
   "dependencies": {
     "express": "^5.1.0",
